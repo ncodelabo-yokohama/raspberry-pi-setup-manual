@@ -29,7 +29,7 @@
 ### 1-3. カスタマイズ設定
 1. `次へ`をクリックし、表示される`Use OS customization?`ダイアログで「設定を編集する」を選択
 2. 基本設定：
-   - `ホスト名`：任意の名前を設定(オプション)
+   - `ホスト名`：任意の名前を設定(必須)
    - OSのログイン時に使う`ユーザー名`と`パスワード`を設定(必須)
    - `Wi-Fi設定`（無線LANを使用する場合のみ）：
      - `Wi-Fiを設定する`にチェック
@@ -106,3 +106,17 @@ N Laboの教室からでも作業できるように、VPNをセットアップ�
 
 10. `Add Linux server`画面で`generate install script`をクリック。生成されたスクリプトをコピー
 ![Add Linux server](https://github.com/ncodelabo-yokohama/raspberry-pi-setup-manual/blob/main/imgaes/014.png)
+
+11. Windowsの場合は、Win+R > `cmd`と入力し、Enterでコマンドプロンプトを、Macの場合はターミナルを開く
+12. 下記のコマンドを入力し、先ほど起動したRaspberry Piに電源ケーブルを接続
+```shell
+# ホスト名の後に、.localを忘れずにつけること
+ssh <自分で設定したRaspberryPiのユーザー名>@<自分で設定したRaspberryPiのホスト名>.local
+
+# 例
+# ssh ubuntu@raspi.local
+```
+13. 初回接続の場合は、`Are you sure you want to continue connecting (yes/no/[fingerprint])?`と聞かれるので、`y`と入力してEnter
+14. 「OSのセットアップ」で設定したパスワードを入力(セキュリティ上の理由から表示されません)
+15. `ubuntu@test-raspi:~$`のように表示されたら、先ほどコピーしたスクリプトをペーストし、実行(途中、ウィンドウが表示された場合、tabキーでカーソルを移動して、OKを選択し、Enterで進めてください。ただ、操作が効かない場合があるので、その場合はコマンドプロンプト or ターミナルそのものを閉じ、再度接続してみてください。)
+16. その後、`ip a`と入力し、`tailscale0`というインターフェースが存在していればセットアップ完了
